@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>منصة الأدوات المتكاملة | شامل - مجاني - آمن</title>
+    
+    <meta name="description" content="منصة متكاملة تحتوي على: تحويل الصور، أدوات PDF، أدوات المطورين، أدوات السوشيال ميديا، إنشاء QR Code وباركود متقدم، وإزالة الخلفية - كل الأدوات مجانية وآمنة">
+    <meta name="keywords" content="تحويل الصور, ضغط PDF, إزالة خلفية الصور, QR Code, باركود, Barcode, JSON formatter, Base64, أدوات مطورين">
+    <meta name="author" content="منصة الأدوات المتكاملة">
+    <meta name="theme-color" content="#1a1a2e">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7199222429919916" crossorigin="anonymous"></script>
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/heic2any.min.js"></script>
+    
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Cropper.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
+    
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>جاري المعالجة...</p>
+    </div>
+    
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/201150603363" class="whatsapp-float" target="_blank" aria-label="واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showToolsPage()">
+                <i class="fas fa-tools"></i>
+                <span>منصة الأدوات المتكاملة</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchTools" placeholder="🔍 ابحث عن أداة..." onkeyup="searchTools()" aria-label="بحث عن أدوات">
+            </div>
+            <div class="nav-controls">
+                
+                <button class="icon-btn" id="fontSizeToggle" aria-label="تكبير الخط"><i class="fas fa-text-height"></i></button>
+                <button class="icon-btn" id="shareSiteBtn" aria-label="مشاركة الموقع"><i class="fas fa-share-alt"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="categories-nav" id="categoriesNav"></div>
+
+    <div class="container" id="main-content">
+        <div class="breadcrumbs" id="breadcrumbs"></div>
+
+        <!-- Tools Dashboard -->
+        <div id="toolsPage" class="page active">
+            <div class="hero">
+                <h1><i class="fas fa-crown"></i> منصة الأدوات المتكاملة</h1>
+                <p>أكثر من 55 أداة مجانية - تعمل مباشرة في متصفحك - آمنة وسريعة 100%</p>
+                <div class="stats-banner">
+                    <span><i class="fas fa-tools"></i> 55+ أداة</span>
+                    <span><i class="fas fa-shield-alt"></i> 100% آمن</span>
+                    <span><i class="fas fa-bolt"></i> فوري وسريع</span>
+                </div>
+            </div>
+            <div id="toolsGrid" class="tools-grid"></div>
+        </div>
+
+        <!-- Dynamic Tool Page -->
+        <div id="toolPage" class="page">
+            <div class="tool-page">
+                <div class="tool-header" id="toolHeader">
+                    <button class="back-btn" onclick="showToolsPage()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h1 id="toolTitle"></h1>
+                    <p id="toolDesc"></p>
+                </div>
+                <div class="tool-body" id="toolBody"></div>
+            </div>
+        </div>
+        
+        <!-- Privacy Policy Page -->
+        <div id="privacyPage" class="page">
+            <div class="info-page">
+                <div class="info-header">
+                    <button class="back-btn" onclick="showToolsPage()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h1><i class="fas fa-shield-alt"></i> سياسة الخصوصية</h1>
+                </div>
+                <div class="info-body" id="privacyContent"></div>
+            </div>
+        </div>
+        
+        <!-- Contact Us Page -->
+        <div id="contactPage" class="page">
+            <div class="info-page">
+                <div class="info-header">
+                    <button class="back-btn" onclick="showToolsPage()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h1><i class="fas fa-envelope"></i> اتصل بنا</h1>
+                </div>
+                <div class="info-body" id="contactContent"></div>
+            </div>
+        </div>
+        
+        <!-- About Us Page -->
+        <div id="aboutPage" class="page">
+            <div class="info-page">
+                <div class="info-header">
+                    <button class="back-btn" onclick="showToolsPage()"><i class="fas fa-arrow-right"></i> رجوع</button>
+                    <h1><i class="fas fa-info-circle"></i> من نحن</h1>
+                </div>
+                <div class="info-body" id="aboutContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Modal -->
+    <div id="adModal" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-ad" style="font-size: 3rem; color: var(--accent);"></i>
+            <h3>إعلان ممول</h3>
+            <p>يرجى مشاهدة الإعلان لاستكمال العملية. شكراً لدعمكم!</p>
+            <div class="ad-container" id="adContainer">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-7199222429919916"
+                    data-ad-slot="1234567890"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+            </div>
+            <div class="ad-timer" id="adTimer">سيتم إغلاق الإعلان تلقائياً خلال <span id="countdown">5</span> ثوانٍ</div>
+            <button class="close-ad" id="closeAdBtn">إغلاق الإعلان</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#" onclick="showPrivacyPage()"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a>
+            <a href="#" onclick="showContactPage()"><i class="fas fa-envelope"></i> اتصل بنا</a>
+            <a href="#" onclick="showAboutPage()"><i class="fas fa-info-circle"></i> من نحن</a>
+        </div>
+        <div class="social-links">
+            <a href="https://wa.me/201150603363" target="_blank" class="whatsapp" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/1B8pRJEb6k/" target="_blank" class="facebook" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" class="linkedin" aria-label="لينكد إن"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" id="twitterShareBtn" class="twitter" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p><i class="fas fa-heart" style="color: var(--accent);"></i> منصة الأدوات المتكاملة | جميع الأدوات مجانية وآمنة | تعمل مباشرة في متصفحك</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">© 2026 جميع الحقوق محفوظة | تصميم وتطوير منصة الأدوات المتكاملة</p>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
