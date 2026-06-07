@@ -59,6 +59,16 @@ function showAdBeforeAction(callback) {
         const modal = document.getElementById('adModal');
         modal.style.display = 'flex';
         
+        // تحديث إعدادات الإعلان لاستخدام الناشر الجديد
+        const adContainer = document.getElementById('adContainer');
+        if (adContainer) {
+            // إزالة الإعلان القديم إذا كان موجوداً
+            const oldIns = adContainer.querySelector('ins');
+            if (oldIns) {
+                oldIns.setAttribute('data-ad-client', 'ca-pub-2811989436900408');
+            }
+        }
+        
         try {
             (adsbygoogle = window.adsbygoogle || []).push({});
         } catch(e) { console.error("AdSense error:", e); }
